@@ -2,7 +2,7 @@ import { Easing, Tween } from "@tweenjs/tween.js";
 import { EventEmitter } from "eventemitter3";
 import { RGBColor } from "./RGBColor";
 
-export class TweenableColor extends EventEmitter {
+export class TweenableColor extends EventEmitter implements ITweenableColor {
   private tween: Tween<RGBColor>;
   private color: RGBColor;
 
