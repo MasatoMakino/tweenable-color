@@ -1,16 +1,20 @@
 import { Easing, Tween } from "@tweenjs/tween.js";
 import { EventEmitter } from "eventemitter3";
+import { RGBColor } from "./RGBColor";
 
-export class TweenableColor extends EventEmitter {
-  private tween: Tween<TweenableColor>;
+export class TweenableColor<T extends RGBColor> extends EventEmitter {
+  private tween: Tween<T>;
+  private color: T;
+
   constructor(
-    public r: number = 255,
-    public g: number = 255,
-    public b: number = 255,
-    public a: number = 1.0
+    r: number = 255,
+    g: number = 255,
+    b: number = 255,
+    alpha: number = 1.0
   ) {
     super();
-    this.tween = new Tween<TweenableColor>(this);
+    this.color = new RGBColor(r, g, b, alpha) as T;
+    this.tween = new Tween<T>(this.color);
   }
 
   changeRGBA(
@@ -23,8 +27,11 @@ export class TweenableColor extends EventEmitter {
   ): void {
     this.tween.stop();
 
-    this.tween = new Tween<TweenableColor>(this)
-      .to({ r: toR, g: toG, b: toB, a: toAlpha }, duration)
+    const fromColor = this.color;
+    const toColor = new RGBColor(toR, toG, toB, toAlpha);
+
+    this.tween = new Tween<T>(fromColor)
+      .to(toColor, duration)
       .easing(easing)
       .onUpdate(() => {
         this.emit("onUpdate", this);
@@ -33,21 +40,26 @@ export class TweenableColor extends EventEmitter {
   }
 
   getAttribute(): [number, number, number, number] {
-    return [this.r, this.g, this.b, this.a];
+    return [
+      this.color.r / 256,
+      this.color.g / 256,
+      this.color.b / 256,
+      this.color.alpha,
+    ];
   }
 
   getCSSStyle(): string {
-    return `rgba(${Math.trunc(this.r)},${Math.trunc(this.g)},${Math.trunc(
-      this.b
-    )},${this.a})`;
+    return `rgba(${Math.trunc(this.color.r)},${Math.trunc(
+      this.color.g
+    )},${Math.trunc(this.color.b)},${this.color.alpha})`;
   }
 
   getCSSColor(): string {
-    return `rgb(${Math.trunc(this.r)},${Math.trunc(this.g)},${Math.trunc(
-      this.b
-    )})`;
+    return `rgb(${Math.trunc(this.color.r)},${Math.trunc(
+      this.color.g
+    )},${Math.trunc(this.color.b)})`;
   }
   getAlpha(): string {
-    return this.a.toString();
+    return this.color.alpha.toString();
   }
 }
