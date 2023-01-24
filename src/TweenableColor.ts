@@ -3,8 +3,8 @@ import { EventEmitter } from "eventemitter3";
 import { RGBColor } from "./RGBColor";
 
 export class TweenableColor extends EventEmitter implements ITweenableColor {
-  private tween: Tween<RGBColor>;
-  private color: RGBColor;
+  protected tween: Tween<any>;
+  protected color: RGBColor;
 
   constructor(
     r: number = 255,
@@ -13,12 +13,11 @@ export class TweenableColor extends EventEmitter implements ITweenableColor {
     alpha: number = 1.0
   ) {
     super();
-
     this.color = new RGBColor(r, g, b, alpha);
-    this.tween = new Tween<RGBColor>(this.color);
+    this.tween = new Tween(this.color);
   }
 
-  changeRGBA(
+  change(
     toR: number,
     toG: number,
     toB: number,
@@ -28,11 +27,11 @@ export class TweenableColor extends EventEmitter implements ITweenableColor {
   ): void {
     this.tween.stop();
 
-    const fromColor = this.color;
-    const toColor = new RGBColor(toR, toG, toB, toAlpha);
+    const color = this.color;
+    const to = new RGBColor(toR, toG, toB, toAlpha);
 
-    this.tween = new Tween(fromColor)
-      .to(toColor, duration)
+    this.tween = new Tween(color)
+      .to(to, duration)
       .easing(easing)
       .onUpdate(() => {
         this.emit("onUpdate", this);
@@ -50,15 +49,15 @@ export class TweenableColor extends EventEmitter implements ITweenableColor {
   }
 
   getCSSStyle(): string {
-    return `rgba(${Math.trunc(this.color.r)},${Math.trunc(
+    return `rgba(${Math.round(this.color.r)},${Math.round(
       this.color.g
-    )},${Math.trunc(this.color.b)},${this.color.alpha})`;
+    )},${Math.round(this.color.b)},${this.color.alpha})`;
   }
 
   getCSSColor(): string {
-    return `rgb(${Math.trunc(this.color.r)},${Math.trunc(
+    return `rgb(${Math.round(this.color.r)},${Math.round(
       this.color.g
-    )},${Math.trunc(this.color.b)})`;
+    )},${Math.round(this.color.b)})`;
   }
   getAlpha(): string {
     return this.color.alpha.toString();

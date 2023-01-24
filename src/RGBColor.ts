@@ -2,9 +2,9 @@ import Color from "color";
 
 export class RGBColor {
   constructor(
-    public r: number = 255,
-    public g: number = 255,
-    public b: number = 255,
+    public r: number = 0,
+    public g: number = 0,
+    public b: number = 0,
     public alpha: number = 1.0
   ) {}
 

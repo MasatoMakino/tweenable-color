@@ -1,4 +1,4 @@
-import { TweenableColor } from "../";
+import { TweenableColor, TweenableHSL } from "../";
 import TWEEN, { Easing } from "@tweenjs/tween.js";
 export class Demo {
   constructor() {
@@ -9,24 +9,42 @@ export class Demo {
     requestAnimationFrame(animate);
 
     const color = new TweenableColor();
+    const rect = Demo.getRect(color, 0, 0);
+    document.body.appendChild(rect);
+    Demo.animateColor(color, rect);
+
+    const hsl = new TweenableHSL();
+    const rectHSL = Demo.getRect(hsl, 0, 160);
+    document.body.appendChild(rectHSL);
+    Demo.animateColor(hsl, rectHSL);
+  }
+
+  private static getRect = (color: TweenableColor, x: number, y: number) => {
     const rect = document.createElement("div");
     rect.style.width = "100px";
     rect.style.height = "100px";
+    rect.style.top = x + "px";
+    rect.style.left = y + "px";
     rect.style.position = "absolute";
     rect.style.backgroundColor = color.getCSSColor();
     rect.style.opacity = color.getAlpha();
+    return rect;
+  };
 
-    document.body.appendChild(rect);
+  private static animateColor = (
+    color: TweenableColor,
+    rect: HTMLDivElement
+  ) => {
     color.on("onUpdate", (e: TweenableColor) => {
       rect.style.backgroundColor = e.getCSSColor();
       rect.style.opacity = e.getAlpha();
     });
 
-    color.changeRGBA(255, 16, 16, 1, 1000, Easing.Cubic.Out);
+    color.change(255, 16, 16, 1, 10000, Easing.Cubic.Out);
     setTimeout(() => {
-      color.changeRGBA(0, 255, 255, 1.0, 1500, Easing.Cubic.Out);
-    }, 3000);
-  }
+      color.change(0, 255, 255, 1.0, 1500, Easing.Cubic.Out);
+    }, 15000);
+  };
 }
 
 window.onload = () => {
