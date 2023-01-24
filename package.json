@@ -1,0 +1,39 @@
+{
+  "name": "@masatomakino/tweenable-color",
+  "version": "0.0.1",
+  "description": "Color object to be tweened by easing function",
+  "main": "./cjs/index.js",
+  "types": "./esm/index.d.ts",
+  "module": "./esm/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky install",
+    "start:dev": "npm run server & npm run watch:tsc & npm run watch:demo",
+    "buildTS": "tsc & tsc --project tsconfig.cjs.json",
+    "watch:tsc": "tsc -W --incremental & tsc -W --incremental --project tsconfig.cjs.json",
+    "demo": "npx @masatomakino/gulptask-demo-page --copyTargets 'png','jpg','jpeg','obj'",
+    "watch:demo": "npm run demo -- -W",
+    "server": "npx browser-sync ./docs/demo -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MasatoMakino/tweenable-color.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MasatoMakino/tweenable-color/issues"
+  },
+  "homepage": "https://github.com/MasatoMakino/tweenable-color#readme",
+  "dependencies": {
+    "eventemitter3": "^4.0.7"
+  },
+  "devDependencies": {
+    "@masatomakino/gulptask-demo-page": "^0.5.3",
+    "@tweenjs/tween.js": "^18.6.4",
+    "husky": "^8.0.0",
+    "prettier": "^2.8.3",
+    "pretty-quick": "^3.1.3",
+    "typescript": "^4.9.4"
+  }
+}
