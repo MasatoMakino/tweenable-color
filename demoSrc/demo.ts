@@ -1,4 +1,3 @@
-import { RGBColor } from "../esm/RGBColor";
 import { TweenableColor } from "../";
 import TWEEN, { Easing } from "@tweenjs/tween.js";
 export class Demo {
@@ -18,7 +17,7 @@ export class Demo {
     rect.style.opacity = color.getAlpha();
 
     document.body.appendChild(rect);
-    color.on("onUpdate", (e: TweenableColor<RGBColor>) => {
+    color.on("onUpdate", (e: TweenableColor) => {
       rect.style.backgroundColor = e.getCSSColor();
       rect.style.opacity = e.getAlpha();
     });

@@ -7,12 +7,13 @@ export class HLSColor {
   s: number = 0;
   a: number = 1.0;
 
-  fromColor(color: Color): HLSColor {
-    this.h = color.hue();
-    this.l = color.lightness();
-    this.s = color.saturationl();
-    this.a = color.alpha();
-    return this;
+  static fromColor(color: Color): HLSColor {
+    const hls = new HLSColor();
+    hls.h = color.hue();
+    hls.l = color.lightness();
+    hls.s = color.saturationl();
+    hls.a = color.alpha();
+    return hls;
   }
 
   toRGB(): RGBColor {

@@ -2,9 +2,9 @@ import { Easing, Tween } from "@tweenjs/tween.js";
 import { EventEmitter } from "eventemitter3";
 import { RGBColor } from "./RGBColor";
 
-export class TweenableColor<T extends RGBColor> extends EventEmitter {
-  private tween: Tween<T>;
-  private color: T;
+export class TweenableColor extends EventEmitter {
+  private tween: Tween<RGBColor>;
+  private color: RGBColor;
 
   constructor(
     r: number = 255,
@@ -13,8 +13,9 @@ export class TweenableColor<T extends RGBColor> extends EventEmitter {
     alpha: number = 1.0
   ) {
     super();
-    this.color = new RGBColor(r, g, b, alpha) as T;
-    this.tween = new Tween<T>(this.color);
+
+    this.color = new RGBColor(r, g, b, alpha);
+    this.tween = new Tween<RGBColor>(this.color);
   }
 
   changeRGBA(
@@ -30,7 +31,7 @@ export class TweenableColor<T extends RGBColor> extends EventEmitter {
     const fromColor = this.color;
     const toColor = new RGBColor(toR, toG, toB, toAlpha);
 
-    this.tween = new Tween<T>(fromColor)
+    this.tween = new Tween(fromColor)
       .to(toColor, duration)
       .easing(easing)
       .onUpdate(() => {
