@@ -40,9 +40,9 @@ export class Demo {
       rect.style.opacity = e.getAlpha();
     });
 
-    color.change(255, 16, 16, 1, 10000, Easing.Cubic.Out);
+    color.change(255, 16, 16, 1, 10000, { easing: Easing.Cubic.Out });
     setTimeout(() => {
-      color.change(0, 255, 255, 1.0, 1500, Easing.Cubic.Out);
+      color.change(0, 255, 255, 1.0, 1500, { easing: Easing.Cubic.Out });
     }, 15000);
   };
 }

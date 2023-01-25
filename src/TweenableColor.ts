@@ -23,8 +23,11 @@ export class TweenableColor extends EventEmitter {
     toB: number,
     toAlpha: number,
     duration: number,
-    easing: (amount: number) => number = Easing.Linear.None
+    option?: ChangeOption
   ): void {
+    const changeOption = TweenableColor.initOption(
+      option
+    ) as Required<ChangeOption>;
     this.tween.stop();
 
     const color = this.color;
@@ -32,18 +35,25 @@ export class TweenableColor extends EventEmitter {
 
     this.tween = new Tween(color)
       .to(to, duration)
-      .easing(easing)
+      .easing(changeOption.easing)
       .onUpdate(() => {
+        console.log("update");
         this.emit("onUpdate", this);
       })
-      .start();
+      .onComplete(() => {})
+      .start(changeOption.startTime);
   }
 
+  protected static initOption(option?: ChangeOption) {
+    option ??= {};
+    option.easing ??= Easing.Linear.None;
+    return option;
+  }
   getAttribute(): [number, number, number, number] {
     return [
-      this.color.r / 256,
-      this.color.g / 256,
-      this.color.b / 256,
+      this.color.r / 255,
+      this.color.g / 255,
+      this.color.b / 255,
       this.color.alpha,
     ];
   }
@@ -71,4 +81,9 @@ export class TweenableColor extends EventEmitter {
       this.color.alpha
     );
   }
+}
+
+export interface ChangeOption {
+  easing?: (amount: number) => number;
+  startTime?: number;
 }

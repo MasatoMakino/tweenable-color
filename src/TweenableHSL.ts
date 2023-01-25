@@ -1,6 +1,6 @@
-import { Easing, Tween } from "@tweenjs/tween.js";
+import { Tween } from "@tweenjs/tween.js";
 import { RGBColor, HSLColor } from "./color";
-import { TweenableColor } from "./TweenableColor";
+import { ChangeOption, TweenableColor } from "./TweenableColor";
 
 export class TweenableHSL extends TweenableColor {
   change(
@@ -9,8 +9,11 @@ export class TweenableHSL extends TweenableColor {
     toB: number,
     toAlpha: number,
     duration: number,
-    easing: (amount: number) => number = Easing.Linear.None
+    option?: ChangeOption
   ): void {
+    const changeOption = TweenableColor.initOption(
+      option
+    ) as Required<ChangeOption>;
     this.tween.stop();
 
     const fromColor = HSLColor.fromRGBA(this.color);
@@ -18,11 +21,11 @@ export class TweenableHSL extends TweenableColor {
 
     this.tween = new Tween(fromColor)
       .to(to, duration)
-      .easing(easing)
+      .easing(changeOption.easing)
       .onUpdate(() => {
         fromColor.copyToRGB(this.color);
         this.emit("onUpdate", this);
       })
-      .start();
+      .start(changeOption.startTime);
   }
 }
