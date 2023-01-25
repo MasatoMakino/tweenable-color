@@ -16,8 +16,10 @@
     "start:dev": "npm run server & npm run watch:tsc & npm run watch:demo",
     "buildTS": "tsc & tsc --project tsconfig.cjs.json",
     "watch:tsc": "tsc -W --incremental & tsc -W --incremental --project tsconfig.cjs.json",
+    "typedocs": "npx typedoc --out ./docs/api src/index.ts",
     "demo": "npx @masatomakino/gulptask-demo-page --copyTargets 'png','jpg','jpeg','obj'",
     "watch:demo": "npm run demo -- -W",
+    "build": "npm run buildTS && npm run demo && npm run typedocs",
     "server": "npx browser-sync ./docs/demo -w"
   },
   "repository": {
@@ -47,6 +49,7 @@
     "prettier": "^2.8.3",
     "pretty-quick": "^3.1.3",
     "ts-jest": "^29.0.5",
+    "typedoc": "^0.23.24",
     "typescript": "^4.9.4"
   }
 }
