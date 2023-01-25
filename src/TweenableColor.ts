@@ -1,15 +1,15 @@
 import { Easing, Tween } from "@tweenjs/tween.js";
 import { EventEmitter } from "eventemitter3";
-import { RGBColor } from "./RGBColor";
+import { RGBColor } from "./color";
 
-export class TweenableColor extends EventEmitter implements ITweenableColor {
+export class TweenableColor extends EventEmitter {
   protected tween: Tween<any>;
   protected color: RGBColor;
 
   constructor(
-    r: number = 255,
-    g: number = 255,
-    b: number = 255,
+    r: number = 0,
+    g: number = 0,
+    b: number = 0,
     alpha: number = 1.0
   ) {
     super();
@@ -61,5 +61,14 @@ export class TweenableColor extends EventEmitter implements ITweenableColor {
   }
   getAlpha(): string {
     return this.color.alpha.toString();
+  }
+
+  clone(): TweenableColor {
+    return new TweenableColor(
+      this.color.r,
+      this.color.g,
+      this.color.b,
+      this.color.alpha
+    );
   }
 }

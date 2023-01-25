@@ -1,6 +1,5 @@
 import { Easing, Tween } from "@tweenjs/tween.js";
-import { HSLColor } from "./HSLColor";
-import { RGBColor } from "./RGBColor";
+import { RGBColor, HSLColor } from "./color";
 import { TweenableColor } from "./TweenableColor";
 
 export class TweenableHSL extends TweenableColor {
