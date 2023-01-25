@@ -40,10 +40,10 @@ export class Demo {
       rect.style.opacity = e.getAlpha();
     });
 
-    color.change(255, 16, 16, 1, 10000, { easing: Easing.Cubic.Out });
+    color.change(255, 16, 16, 1, 8000, { easing: Easing.Cubic.Out });
     setTimeout(() => {
-      color.change(0, 255, 255, 1.0, 1500, { easing: Easing.Cubic.Out });
-    }, 15000);
+      color.change(0, 255, 255, 1.0, 6000, { easing: Easing.Cubic.Out });
+    }, 10000);
   };
 }
 

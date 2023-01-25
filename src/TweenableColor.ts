@@ -37,7 +37,6 @@ export class TweenableColor extends EventEmitter {
       .to(to, duration)
       .easing(changeOption.easing)
       .onUpdate(() => {
-        console.log("update");
         this.emit("onUpdate", this);
       })
       .onComplete(() => {})
