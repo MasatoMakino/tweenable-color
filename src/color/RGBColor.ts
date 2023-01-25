@@ -9,12 +9,12 @@ export class RGBColor {
   ) {}
 
   static fromColor(color: Color): RGBColor {
-    const rgb = new RGBColor();
-    rgb.r = color.red();
-    rgb.g = color.green();
-    rgb.b = color.blue();
-    rgb.alpha = color.alpha();
-    return rgb;
+    return new RGBColor(
+      color.red(),
+      color.green(),
+      color.blue(),
+      color.alpha()
+    );
   }
   clone(): RGBColor {
     return new RGBColor(this.r, this.g, this.b, this.alpha);
