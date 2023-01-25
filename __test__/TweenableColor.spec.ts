@@ -45,25 +45,17 @@ describe("TweenableColor", () => {
     expect(color.getAlpha()).toEqual("0");
   });
 
-  test("getCSSStyle", () => {
+  test("getCSSStyle and CSSColor", () => {
     const color = new TweenableColor();
     expect(color.getCSSStyle()).toEqual("rgba(0,0,0,1)");
-
-    const white = new TweenableColor(255, 255, 255);
-    expect(white.getCSSStyle()).toEqual("rgba(255,255,255,1)");
-
-    const half = new TweenableColor(200.4, 200.5, 200.6);
-    expect(half.getCSSStyle()).toEqual("rgba(200,201,201,1)");
-  });
-
-  test("getCSSColor", () => {
-    const color = new TweenableColor();
     expect(color.getCSSColor()).toEqual("rgb(0,0,0)");
 
     const white = new TweenableColor(255, 255, 255);
+    expect(white.getCSSStyle()).toEqual("rgba(255,255,255,1)");
     expect(white.getCSSColor()).toEqual("rgb(255,255,255)");
 
     const half = new TweenableColor(200.4, 200.5, 200.6);
+    expect(half.getCSSStyle()).toEqual("rgba(200,201,201,1)");
     expect(half.getCSSColor()).toEqual("rgb(200,201,201)");
   });
 });
