@@ -9,3 +9,11 @@ Color object to be tweened by easing function
 ## Demo
 
 [Demo Page](https://masatomakino.github.io/tweenable-color/demo/)
+
+## Setup guide
+
+### Install
+
+```bash
+npm i -D @masatomakino/tweenable-color
+```
