@@ -1,8 +1,10 @@
-import { Tween } from "@tweenjs/tween.js";
-import { RGBColor, HSLColor } from "./color";
+import { TweenableColorTicker } from "./TweenableColorTicker";
+import { HSLColor } from "./color";
 import { ChangeOption, TweenableColor } from "./TweenableColor";
 
 export class TweenableHSL extends TweenableColor {
+  protected fromHSL: HSLColor = new HSLColor();
+  protected toHSL: HSLColor = new HSLColor();
   change(
     toR: number,
     toG: number,
@@ -14,18 +16,32 @@ export class TweenableHSL extends TweenableColor {
     const changeOption = TweenableColor.initOption(
       option
     ) as Required<ChangeOption>;
-    this.tween.stop();
 
-    const fromColor = HSLColor.fromRGBA(this.color);
-    const to = HSLColor.fromRGBA(new RGBColor(toR, toG, toB, toAlpha));
+    this.to.setRGBA(toR, toG, toB, toAlpha);
+    if (this.to.equal(this.color)) return;
 
-    this.tween = new Tween(fromColor)
-      .to(to, duration)
-      .easing(changeOption.easing)
-      .onUpdate(() => {
-        fromColor.copyToRGB(this.color);
-        this.emit("onUpdate", this);
-      })
-      .start(changeOption.startTime);
+    TweenableColorTicker.ticker.removeListener("raf", this.onTick);
+    this.fromHSL.set(this.color);
+    this.toHSL.setRGBA(toR, toG, toB, toAlpha);
+
+    this.startTime = changeOption.startTime ?? performance.now();
+    this.duration = duration;
+    this.easing = changeOption.easing;
+
+    TweenableColorTicker.ticker.on("raf", this.onTick);
   }
+
+  protected onTick = (ms: number) => {
+    if (ms > this.startTime + this.duration) {
+      this.color.set(this.to);
+      TweenableColorTicker.ticker.removeListener("raf", this.onTick);
+      this.emit("onUpdate", this);
+      // TODO : emit "onComplete"
+      return;
+    }
+
+    const t = this.easing((ms - this.startTime) / this.duration);
+    this.color.mixHSL(this.fromHSL, this.toHSL, t);
+    this.emit("onUpdate", this);
+  };
 }

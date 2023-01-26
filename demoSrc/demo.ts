@@ -1,12 +1,8 @@
-import { TweenableColor, TweenableHSL } from "../";
-import TWEEN, { Easing } from "@tweenjs/tween.js";
+import { TweenableColor, TweenableHSL, TweenableColorTicker } from "../";
+import { Easing } from "@tweenjs/tween.js";
 export class Demo {
   constructor() {
-    const animate = (time: number) => {
-      requestAnimationFrame(animate);
-      TWEEN.update(time);
-    };
-    requestAnimationFrame(animate);
+    TweenableColorTicker.start();
 
     const color = new TweenableColor();
     const rect = Demo.getRect(color, 0, 0);
