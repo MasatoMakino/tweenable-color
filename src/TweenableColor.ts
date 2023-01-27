@@ -1,10 +1,16 @@
-import { Easing, Tween } from "@tweenjs/tween.js";
+import { Easing } from "@tweenjs/tween.js";
 import { EventEmitter } from "eventemitter3";
+import { TweenableColorTicker } from "./TweenableColorTicker";
 import { RGBColor } from "./color";
 
-export class TweenableColor extends EventEmitter {
-  protected tween: Tween<any>;
+export class TweenableColor extends EventEmitter<"onUpdate", TweenableColor> {
   protected color: RGBColor;
+
+  protected from: RGBColor = new RGBColor();
+  protected to: RGBColor = new RGBColor();
+  protected startTime: number = 0;
+  protected duration: number = 0;
+  protected easing: (amount: number) => number = Easing.Linear.None;
 
   constructor(
     r: number = 0,
@@ -14,7 +20,6 @@ export class TweenableColor extends EventEmitter {
   ) {
     super();
     this.color = new RGBColor(r, g, b, alpha);
-    this.tween = new Tween(this.color);
   }
 
   change(
@@ -28,20 +33,33 @@ export class TweenableColor extends EventEmitter {
     const changeOption = TweenableColor.initOption(
       option
     ) as Required<ChangeOption>;
-    this.tween.stop();
 
-    const color = this.color;
-    const to = new RGBColor(toR, toG, toB, toAlpha);
+    this.to.setRGBA(toR, toG, toB, toAlpha);
+    if (this.to.equal(this.color)) return;
 
-    this.tween = new Tween(color)
-      .to(to, duration)
-      .easing(changeOption.easing)
-      .onUpdate(() => {
-        this.emit("onUpdate", this);
-      })
-      .onComplete(() => {})
-      .start(changeOption.startTime);
+    TweenableColorTicker.ticker.removeListener("raf", this.onTick);
+    this.from.set(this.color);
+
+    this.startTime = changeOption.startTime ?? performance.now();
+    this.duration = duration;
+    this.easing = changeOption.easing;
+
+    TweenableColorTicker.ticker.on("raf", this.onTick);
   }
+
+  protected onTick = (ms: number) => {
+    if (ms > this.startTime + this.duration) {
+      this.color.set(this.to);
+      TweenableColorTicker.ticker.removeListener("raf", this.onTick);
+      this.emit("onUpdate", this);
+      // TODO : emit "onComplete"
+      return;
+    }
+
+    const t = this.easing((ms - this.startTime) / this.duration);
+    this.color.mix(this.from, this.to, t);
+    this.emit("onUpdate", this);
+  };
 
   protected static initOption(option?: ChangeOption) {
     option ??= {};

@@ -46,4 +46,20 @@ export class HSLColor {
     rgbObj.b = hslObj.blue();
     rgbObj.alpha = hslObj.alpha();
   }
+
+  set(rgbObj: RGBColor): void {
+    const color = Color.rgb(rgbObj);
+    this.h = color.hue();
+    this.l = color.lightness();
+    this.s = color.saturationl();
+    this.a = color.alpha();
+  }
+
+  setRGBA(r: number, g: number, b: number, alpha: number): void {
+    const color = Color.rgb({ r, g, b, alpha });
+    this.h = color.hue();
+    this.l = color.lightness();
+    this.s = color.saturationl();
+    this.a = color.alpha();
+  }
 }
