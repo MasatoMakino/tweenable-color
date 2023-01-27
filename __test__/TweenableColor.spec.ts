@@ -1,10 +1,9 @@
-import TWEEN from "@tweenjs/tween.js";
-import { TweenableColor } from "../src";
+import { TweenableColor, TweenableColorTicker } from "../src";
 
 describe("TweenableColor", () => {
   beforeEach(() => {
-    TWEEN.removeAll();
-    TWEEN.update(0);
+    TweenableColorTicker.ticker.removeAllListeners("raf");
+    TweenableColorTicker.update(0);
   });
 
   test("new TweenableColor", () => {
@@ -17,7 +16,7 @@ describe("TweenableColor", () => {
     expect(color.getAttribute()).toEqual([0, 0, 0, 1]);
 
     color.change(255, 255, 255, 1.0, 1, { startTime: 0 });
-    TWEEN.update(1);
+    TweenableColorTicker.update(1);
     expect(color.getAttribute()).toEqual([1, 1, 1, 1]);
   });
 
@@ -29,7 +28,7 @@ describe("TweenableColor", () => {
     expect(clone.getAttribute()).toEqual([0, 0, 0, 1]);
 
     color.change(255, 255, 255, 1.0, 1, { startTime: 0 });
-    TWEEN.update(1);
+    TweenableColorTicker.update(1);
     expect(clone.getAttribute()).toEqual([0, 0, 0, 1]);
   });
 
@@ -38,10 +37,10 @@ describe("TweenableColor", () => {
     expect(color.getAlpha()).toEqual("1");
 
     color.change(255, 255, 255, 0.0, 1, { startTime: 0 });
-    TWEEN.update(0.5);
+    TweenableColorTicker.update(0.5);
     expect(color.getAlpha()).toEqual("0.5");
 
-    TWEEN.update(1.0);
+    TweenableColorTicker.update(1.0);
     expect(color.getAlpha()).toEqual("0");
   });
 
