@@ -31,14 +31,9 @@ export class TweenableHSL extends TweenableColor {
     TweenableColorTicker.ticker.on("raf", this.onTick);
   }
 
-  protected onTick = (ms: number) => {
-    if (ms > this.startTime + this.duration) {
-      this.color.set(this.to);
-      TweenableColorTicker.ticker.removeListener("raf", this.onTick);
-      this.emit("onUpdate", this);
-      // TODO : emit "onComplete"
-      return;
-    }
+  protected override onTick = (ms: number) => {
+    const isComplete = this.onComplete(ms);
+    if (isComplete) return;
 
     const t = this.easing((ms - this.startTime) / this.duration);
     this.color.mixHSL(this.fromHSL, this.toHSL, t);
