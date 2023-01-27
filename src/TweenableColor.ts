@@ -48,18 +48,24 @@ export class TweenableColor extends EventEmitter<"onUpdate", TweenableColor> {
   }
 
   protected onTick = (ms: number) => {
-    if (ms > this.startTime + this.duration) {
-      this.color.set(this.to);
-      TweenableColorTicker.ticker.removeListener("raf", this.onTick);
-      this.emit("onUpdate", this);
-      // TODO : emit "onComplete"
-      return;
-    }
+    const isComplete = this.onComplete(ms);
+    if (isComplete) return;
 
     const t = this.easing((ms - this.startTime) / this.duration);
     this.color.mix(this.from, this.to, t);
     this.emit("onUpdate", this);
   };
+
+  protected onComplete(ms: number): boolean {
+    if (ms > this.startTime + this.duration) {
+      this.color.set(this.to);
+      TweenableColorTicker.ticker.removeListener("raf", this.onTick);
+      this.emit("onUpdate", this);
+      // TODO : emit "onComplete"
+      return true;
+    }
+    return false;
+  }
 
   protected static initOption(option?: ChangeOption) {
     option ??= {};

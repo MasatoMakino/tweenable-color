@@ -2,11 +2,17 @@ import EventEmitter from "eventemitter3";
 
 export class TweenableColorTicker {
   static ticker: EventEmitter<"raf", number> = new EventEmitter();
-  static isStart: boolean = false;
-  static start(): void {
-    if (!this.isStart) {
-      this.rafCallback(performance.now());
-      this.isStart = true;
+  static rafID?: number;
+  static start(now?: number): void {
+    if (!this.rafID) {
+      this.rafCallback(now ?? performance.now());
+    }
+  }
+
+  static stop(): void {
+    if (this.rafID) {
+      cancelAnimationFrame(this.rafID);
+      this.rafID = undefined;
     }
   }
 
@@ -16,6 +22,6 @@ export class TweenableColorTicker {
 
   static rafCallback = (ms: number) => {
     this.update(ms);
-    requestAnimationFrame(this.rafCallback);
+    this.rafID = requestAnimationFrame(this.rafCallback);
   };
 }
