@@ -3,7 +3,10 @@ import { EventEmitter } from "eventemitter3";
 import { TweenableColorTicker } from "./TweenableColorTicker";
 import { RGBColor } from "./color";
 
-export class TweenableColor extends EventEmitter<"onUpdate", TweenableColor> {
+export class TweenableColor extends EventEmitter<
+  "onUpdate" | "onComplete",
+  TweenableColor
+> {
   protected color: RGBColor;
 
   protected from: RGBColor = new RGBColor();
@@ -73,7 +76,7 @@ export class TweenableColor extends EventEmitter<"onUpdate", TweenableColor> {
       this.color.set(this.to);
       TweenableColorTicker.ticker.removeListener("raf", this.onTick);
       this.emit("onUpdate", this);
-      // TODO : emit "onComplete"
+      this.emit("onComplete", this);
       return true;
     }
     return false;
