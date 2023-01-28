@@ -34,11 +34,10 @@ export class TweenableColor extends EventEmitter<"onUpdate", TweenableColor> {
       option
     ) as Required<ChangeOption>;
 
-    this.to.setRGBA(toR, toG, toB, toAlpha);
-    if (this.to.equal(this.color)) return;
+    if (this.color.equalRGBA(toR, toG, toB, toAlpha)) return;
 
     TweenableColorTicker.ticker.removeListener("raf", this.onTick);
-    this.from.set(this.color);
+    this.initFromAndTo(toR, toG, toB, toAlpha);
 
     this.startTime = changeOption.startTime ?? performance.now();
     this.duration = duration;
@@ -47,14 +46,27 @@ export class TweenableColor extends EventEmitter<"onUpdate", TweenableColor> {
     TweenableColorTicker.ticker.on("raf", this.onTick);
   }
 
+  protected initFromAndTo(
+    toR: number,
+    toG: number,
+    toB: number,
+    toAlpha: number
+  ): void {
+    this.to.setRGBA(toR, toG, toB, toAlpha);
+    this.from.set(this.color);
+  }
   protected onTick = (ms: number) => {
     const isComplete = this.onComplete(ms);
     if (isComplete) return;
 
+    this.updateColor(ms);
+  };
+
+  protected updateColor(ms: number): void {
     const t = this.easing((ms - this.startTime) / this.duration);
     this.color.mix(this.from, this.to, t);
     this.emit("onUpdate", this);
-  };
+  }
 
   protected onComplete(ms: number): boolean {
     if (ms > this.startTime + this.duration) {

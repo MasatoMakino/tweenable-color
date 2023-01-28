@@ -5,38 +5,21 @@ import { ChangeOption, TweenableColor } from "./TweenableColor";
 export class TweenableHSL extends TweenableColor {
   protected fromHSL: HSLColor = new HSLColor();
   protected toHSL: HSLColor = new HSLColor();
-  change(
+
+  protected override initFromAndTo(
     toR: number,
     toG: number,
     toB: number,
-    toAlpha: number,
-    duration: number,
-    option?: ChangeOption
-  ): void {
-    const changeOption = TweenableColor.initOption(
-      option
-    ) as Required<ChangeOption>;
-
-    this.to.setRGBA(toR, toG, toB, toAlpha);
-    if (this.to.equal(this.color)) return;
-
-    TweenableColorTicker.ticker.removeListener("raf", this.onTick);
+    toAlpha: number
+  ) {
+    super.initFromAndTo(toR, toG, toB, toAlpha);
     this.fromHSL.set(this.color);
     this.toHSL.setRGBA(toR, toG, toB, toAlpha);
-
-    this.startTime = changeOption.startTime ?? performance.now();
-    this.duration = duration;
-    this.easing = changeOption.easing;
-
-    TweenableColorTicker.ticker.on("raf", this.onTick);
   }
 
-  protected override onTick = (ms: number) => {
-    const isComplete = this.onComplete(ms);
-    if (isComplete) return;
-
+  protected override updateColor(ms: number) {
     const t = this.easing((ms - this.startTime) / this.duration);
     this.color.mixHSL(this.fromHSL, this.toHSL, t);
     this.emit("onUpdate", this);
-  };
+  }
 }

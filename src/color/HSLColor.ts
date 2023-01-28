@@ -2,24 +2,12 @@ import Color from "color";
 import { RGBColor } from "./RGBColor";
 
 export class HSLColor {
-  h: number = 0;
-  l: number = 0;
-  s: number = 0;
-  a: number = 1.0;
-
-  static fromColor(color: Color): HSLColor {
-    const hls = new HSLColor();
-    hls.h = color.hue();
-    hls.l = color.lightness();
-    hls.s = color.saturationl();
-    hls.a = color.alpha();
-    return hls;
-  }
-
-  static fromRGBA(rgba: RGBColor): HSLColor {
-    const color = Color.rgb(rgba);
-    return this.fromColor(color);
-  }
+  constructor(
+    public h: number = 0,
+    public s: number = 0,
+    public l: number = 0,
+    public alpha: number = 1.0
+  ) {}
 
   toRGB(): RGBColor {
     const hslObj = this.toColor();
@@ -36,15 +24,8 @@ export class HSLColor {
       h: this.h,
       l: this.l,
       s: this.s,
-      alpha: this.a,
+      alpha: this.alpha,
     });
-  }
-  copyToRGB(rgbObj: RGBColor): void {
-    const hslObj = this.toColor();
-    rgbObj.r = hslObj.red();
-    rgbObj.g = hslObj.green();
-    rgbObj.b = hslObj.blue();
-    rgbObj.alpha = hslObj.alpha();
   }
 
   set(rgbObj: RGBColor): void {
@@ -52,7 +33,7 @@ export class HSLColor {
     this.h = color.hue();
     this.l = color.lightness();
     this.s = color.saturationl();
-    this.a = color.alpha();
+    this.alpha = color.alpha();
   }
 
   setRGBA(r: number, g: number, b: number, alpha: number): void {
@@ -60,6 +41,6 @@ export class HSLColor {
     this.h = color.hue();
     this.l = color.lightness();
     this.s = color.saturationl();
-    this.a = color.alpha();
+    this.alpha = color.alpha();
   }
 }
