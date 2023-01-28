@@ -1,7 +1,12 @@
 import { TweenableColor, TweenableColorTicker } from "../src";
 
 describe("TweenableColor", () => {
+  let updateCallback = jest.fn();
+  let completeCallback = jest.fn();
+
   beforeEach(() => {
+    updateCallback = jest.fn();
+    completeCallback = jest.fn();
     TweenableColorTicker.ticker.removeAllListeners("raf");
     TweenableColorTicker.update(0);
   });
@@ -14,10 +19,41 @@ describe("TweenableColor", () => {
   test("tween", () => {
     const color = new TweenableColor();
     expect(color.getAttribute()).toEqual([0, 0, 0, 1]);
-
+    color.on("onUpdate", updateCallback);
     color.change(255, 255, 255, 1.0, 1, { startTime: 0 });
     TweenableColorTicker.update(1);
     expect(color.getAttribute()).toEqual([1, 1, 1, 1]);
+    expect(updateCallback).toBeCalled();
+  });
+
+  test("skip tween", () => {
+    const color = new TweenableColor(0, 0, 0, 1);
+    color.on("onUpdate", updateCallback);
+    color.change(0, 0, 0, 1.0, 1, { startTime: 0 });
+    TweenableColorTicker.update(1);
+    expect(color.getAttribute()).toEqual([0, 0, 0, 1]);
+    expect(updateCallback).not.toBeCalled();
+  });
+
+  test("complete", () => {
+    const color = new TweenableColor();
+    color.on("onUpdate", updateCallback);
+    color.on("onComplete", completeCallback);
+    color.change(255, 255, 255, 1.0, 1, { startTime: 0 });
+
+    TweenableColorTicker.update(1);
+    expect(color.getAttribute()).toEqual([1, 1, 1, 1]);
+    expect(updateCallback).toBeCalledTimes(1);
+    expect(completeCallback).toBeCalledTimes(0);
+
+    TweenableColorTicker.update(1.000001);
+    expect(color.getAttribute()).toEqual([1, 1, 1, 1]);
+    expect(updateCallback).toBeCalledTimes(2);
+    expect(completeCallback).toBeCalledTimes(1);
+
+    TweenableColorTicker.update(1000);
+    expect(updateCallback).toBeCalledTimes(2);
+    expect(completeCallback).toBeCalledTimes(1);
   });
 
   test("clone", () => {
