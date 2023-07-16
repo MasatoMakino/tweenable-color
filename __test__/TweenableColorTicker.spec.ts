@@ -1,4 +1,4 @@
-import { TweenableColor, TweenableColorTicker } from "../src";
+import { TweenableColor, TweenableColorTicker } from "../src/index.js";
 
 describe("TweenableColor", () => {
   afterEach(() => {

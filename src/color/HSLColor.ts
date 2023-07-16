@@ -1,5 +1,5 @@
 import Color from "color";
-import { RGBColor } from "./RGBColor";
+import { RGBColor } from "./index.js";
 
 export class HSLColor {
   constructor(

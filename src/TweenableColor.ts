@@ -1,7 +1,6 @@
 import { Easing } from "@tweenjs/tween.js";
 import { EventEmitter } from "eventemitter3";
-import { TweenableColorTicker } from "./TweenableColorTicker";
-import { RGBColor } from "./color";
+import { TweenableColorTicker, RGBColor } from "./index.js";
 
 export class TweenableColor extends EventEmitter<
   "onUpdate" | "onComplete",
