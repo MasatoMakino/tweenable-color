@@ -2,11 +2,11 @@
   "name": "@masatomakino/tweenable-color",
   "version": "0.0.5",
   "description": "Color object to be tweened by easing function",
-  "main": "./cjs/index.js",
+  "type": "module",
+  "main": "./esm/index.js",
   "types": "./esm/index.d.ts",
   "module": "./esm/index.js",
   "files": [
-    "cjs",
     "esm"
   ],
   "scripts": {
@@ -16,8 +16,8 @@
     "preversion": "git checkout main && git pull && npm ci && npm run test",
     "postversion": "git add package.json package-lock.json && git checkout -b version/$(git describe --tags --abbrev=0)",
     "start:dev": "npm run server & npm run watch:tsc & npm run watch:demo",
-    "buildTS": "tsc & tsc --project tsconfig.cjs.json",
-    "watch:tsc": "tsc -W --incremental & tsc -W --incremental --project tsconfig.cjs.json",
+    "buildTS": "tsc",
+    "watch:tsc": "tsc -W --incremental",
     "typedocs": "npx typedoc --out ./docs/api src/index.ts",
     "demo": "npx @masatomakino/gulptask-demo-page --copyTargets 'png','jpg','jpeg','obj'",
     "watch:demo": "npm run demo -- -W",

@@ -1,2 +1,2 @@
-export * from "./RGBColor";
-export * from "./HSLColor";
+export * from "./RGBColor.js";
+export * from "./HSLColor.js";

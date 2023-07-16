@@ -1,6 +1,4 @@
-import { TweenableColorTicker } from "./TweenableColorTicker";
-import { HSLColor } from "./color";
-import { ChangeOption, TweenableColor } from "./TweenableColor";
+import { HSLColor, TweenableColor } from "./index.js";
 
 export class TweenableHSL extends TweenableColor {
   protected fromHSL: HSLColor = new HSLColor();
