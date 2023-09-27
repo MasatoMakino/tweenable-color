@@ -1,11 +1,11 @@
 {
   "name": "@masatomakino/tweenable-color",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Color object to be tweened by easing function",
   "type": "module",
   "exports": {
     ".": {
-      "default":{
+      "default": {
         "types": "./esm/index.d.ts",
         "default": "./esm/index.js"
       }
