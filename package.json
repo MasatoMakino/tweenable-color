@@ -3,9 +3,15 @@
   "version": "0.1.0",
   "description": "Color object to be tweened by easing function",
   "type": "module",
-  "main": "./esm/index.js",
+  "exports": {
+    ".": {
+      "default": {
+        "types": "./esm/index.d.ts",
+        "default": "./esm/index.js"
+      }
+    }
+  },
   "types": "./esm/index.d.ts",
-  "module": "./esm/index.js",
   "files": [
     "esm"
   ],
@@ -34,23 +40,25 @@
     "url": "https://github.com/MasatoMakino/tweenable-color/issues"
   },
   "homepage": "https://github.com/MasatoMakino/tweenable-color#readme",
+  "peerDependencies": {
+    "@tweenjs/tween.js": "^21.0.0"
+  },
   "dependencies": {
     "color": "^4.2.3",
     "eventemitter3": "^5.0.1"
   },
   "devDependencies": {
-    "@masatomakino/gulptask-demo-page": "^0.7.0",
-    "@tweenjs/tween.js": "^21.0.0",
-    "@types/color": "^3.0.3",
-    "@types/jest": "^29.5.3",
+    "@masatomakino/gulptask-demo-page": "^0.7.3",
+    "@types/color": "^3.0.4",
+    "@types/jest": "^29.5.5",
     "husky": "^8.0.0",
-    "jest": "^29.6.1",
-    "jest-environment-jsdom": "^29.6.1",
-    "lint-staged": "^13.2.3",
-    "prettier": "^3.0.1",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "lint-staged": "^14.0.1",
+    "prettier": "^3.0.3",
     "ts-jest": "^29.1.1",
-    "typedoc": "^0.24.8",
-    "typescript": "^5.1.6"
+    "typedoc": "^0.25.1",
+    "typescript": "^5.2.2"
   },
   "lint-staged": {
     "*.{js,ts,css,md}": "prettier --write"
