@@ -1,4 +1,8 @@
-import { TweenableColor, TweenableHSL, TweenableColorTicker } from "../";
+import {
+  TweenableColor,
+  TweenableHSL,
+  TweenableColorTicker,
+} from "../esm/index.js";
 import { Easing } from "@tweenjs/tween.js";
 export class Demo {
   constructor() {
@@ -29,7 +33,7 @@ export class Demo {
 
   private static animateColor = (
     color: TweenableColor,
-    rect: HTMLDivElement
+    rect: HTMLDivElement,
   ) => {
     color.on("onUpdate", (e: TweenableColor) => {
       rect.style.backgroundColor = e.getCSSColor();
