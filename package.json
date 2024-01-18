@@ -41,7 +41,7 @@
   },
   "homepage": "https://github.com/MasatoMakino/tweenable-color#readme",
   "peerDependencies": {
-    "@tweenjs/tween.js": "^21.0.0"
+    "@tweenjs/tween.js": "21.0.0 - 23.x"
   },
   "dependencies": {
     "color": "^4.2.3",
