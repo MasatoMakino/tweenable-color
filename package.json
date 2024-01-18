@@ -1,6 +1,6 @@
 {
   "name": "@masatomakino/tweenable-color",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Color object to be tweened by easing function",
   "type": "module",
   "exports": {
