@@ -57,7 +57,7 @@
     "lint-staged": "^15.0.2",
     "prettier": "^3.0.3",
     "ts-jest": "^29.1.1",
-    "typedoc": "^0.25.1",
+    "typedoc": "^0.26.3",
     "typescript": "^5.1.6"
   },
   "lint-staged": {
