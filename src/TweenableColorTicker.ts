@@ -1,7 +1,7 @@
 import EventEmitter from "eventemitter3";
 
 export class TweenableColorTicker {
-  static ticker: EventEmitter<"raf", number> = new EventEmitter();
+  static readonly ticker: EventEmitter<"raf", number> = new EventEmitter();
 
   static get rafID() {
     return this._rafID;
