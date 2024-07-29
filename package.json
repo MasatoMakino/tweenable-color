@@ -41,7 +41,7 @@
   },
   "homepage": "https://github.com/MasatoMakino/tweenable-color#readme",
   "peerDependencies": {
-    "@tweenjs/tween.js": "21.0.0 - 23.x"
+    "@tweenjs/tween.js": "21.0.0 - 25.x.x"
   },
   "dependencies": {
     "color": "^4.2.3",
@@ -49,6 +49,7 @@
   },
   "devDependencies": {
     "@masatomakino/gulptask-demo-page": "^0.8.3",
+    "@tweenjs/tween.js": "^25.0.0",
     "@types/color": "^3.0.6",
     "@types/jest": "^29.5.12",
     "husky": "^9.1.3",
