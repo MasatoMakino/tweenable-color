@@ -1,4 +1,4 @@
-import Color from "color";
+import Color, { ColorInstance } from "color";
 import { RGBColor } from "./index.js";
 
 export class HSLColor {
@@ -6,7 +6,7 @@ export class HSLColor {
     public h: number = 0,
     public s: number = 0,
     public l: number = 0,
-    public alpha: number = 1.0
+    public alpha: number = 1.0,
   ) {}
 
   toRGB(): RGBColor {
@@ -15,17 +15,12 @@ export class HSLColor {
       hslObj.red(),
       hslObj.green(),
       hslObj.blue(),
-      hslObj.alpha()
+      hslObj.alpha(),
     );
   }
 
-  private toColor(): Color {
-    return Color.hsl({
-      h: this.h,
-      l: this.l,
-      s: this.s,
-      alpha: this.alpha,
-    });
+  private toColor(): ColorInstance {
+    return Color.hsl({ h: this.h, l: this.l, s: this.s, alpha: this.alpha });
   }
 
   set(rgbObj: RGBColor): void {
