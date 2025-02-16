@@ -28,7 +28,8 @@
     "demo": "npx @masatomakino/gulptask-demo-page --copyTargets 'png','jpg','jpeg','obj'",
     "watch:demo": "npm run demo -- -W",
     "build": "npm run buildTS && npm run demo && npm run typedocs",
-    "server": "npx browser-sync ./docs/demo -w"
+    "server": "npx browser-sync ./docs/demo -w",
+    "release": "npx @masatomakino/release-helper release"
   },
   "repository": {
     "type": "git",
@@ -49,6 +50,7 @@
   },
   "devDependencies": {
     "@masatomakino/gulptask-demo-page": "^0.8.3",
+    "@masatomakino/release-helper": "^0.1.7",
     "@tweenjs/tween.js": "^25.0.0",
     "@types/color": "^4.2.0",
     "@types/jest": "^29.5.12",
