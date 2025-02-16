@@ -1,4 +1,4 @@
-import Color from "color";
+import { ColorInstance } from "color";
 import { HSLColor } from "./index.js";
 
 export class RGBColor {
@@ -6,15 +6,15 @@ export class RGBColor {
     public r: number = 0,
     public g: number = 0,
     public b: number = 0,
-    public alpha: number = 1.0
+    public alpha: number = 1.0,
   ) {}
 
-  static fromColor(color: Color): RGBColor {
+  static fromColor(color: ColorInstance): RGBColor {
     return new RGBColor(
       color.red(),
       color.green(),
       color.blue(),
-      color.alpha()
+      color.alpha(),
     );
   }
 

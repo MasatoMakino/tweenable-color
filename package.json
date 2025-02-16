@@ -45,14 +45,13 @@
     "@tweenjs/tween.js": "21.0.0 - 25.x.x"
   },
   "dependencies": {
-    "color": "^4.2.3",
+    "color": "^5.0.0",
     "eventemitter3": "^5.0.1"
   },
   "devDependencies": {
     "@masatomakino/gulptask-demo-page": "^0.8.3",
     "@masatomakino/release-helper": "^0.1.7",
     "@tweenjs/tween.js": "^25.0.0",
-    "@types/color": "^4.2.0",
     "@vitest/browser": "*",
     "@vitest/coverage-istanbul": "^3.0.5",
     "husky": "^9.1.3",
