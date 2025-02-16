@@ -45,7 +45,7 @@
     "@tweenjs/tween.js": "21.0.0 - 25.x.x"
   },
   "dependencies": {
-    "color": "^4.2.3",
+    "color": "^5.0.0",
     "eventemitter3": "^5.0.1"
   },
   "devDependencies": {
