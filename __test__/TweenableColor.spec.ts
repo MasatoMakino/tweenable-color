@@ -1,12 +1,13 @@
+import { beforeEach, describe, expect, test, vi } from "vitest";
 import { TweenableColor, TweenableColorTicker } from "../src/index.js";
 
 describe("TweenableColor", () => {
-  let updateCallback = jest.fn();
-  let completeCallback = jest.fn();
+  let updateCallback = vi.fn();
+  let completeCallback = vi.fn();
 
   beforeEach(() => {
-    updateCallback = jest.fn();
-    completeCallback = jest.fn();
+    updateCallback = vi.fn();
+    completeCallback = vi.fn();
     TweenableColorTicker.ticker.removeAllListeners("raf");
     TweenableColorTicker.update(0);
   });

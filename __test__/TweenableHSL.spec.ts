@@ -1,4 +1,5 @@
-import { TweenableHSL, TweenableColorTicker } from "../src/index.js";
+import { beforeEach, describe, expect, test } from "vitest";
+import { TweenableColorTicker, TweenableHSL } from "../src/index.js";
 
 describe("TweenableHSL", () => {
   beforeEach(() => {
