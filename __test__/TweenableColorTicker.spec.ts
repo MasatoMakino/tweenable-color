@@ -1,4 +1,4 @@
-import { describe, afterEach, test, expect } from "vitest";
+import { afterEach, describe, expect, test } from "vitest";
 import { TweenableColorTicker } from "../src/index.js";
 
 describe("TweenableColor", () => {

@@ -8,7 +8,7 @@ export class TweenableHSL extends TweenableColor {
     toR: number,
     toG: number,
     toB: number,
-    toAlpha: number
+    toAlpha: number,
   ) {
     super.initFromAndTo(toR, toG, toB, toAlpha);
     this.fromHSL.set(this.color);

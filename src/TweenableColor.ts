@@ -1,6 +1,6 @@
 import { Easing } from "@tweenjs/tween.js";
 import { EventEmitter } from "eventemitter3";
-import { TweenableColorTicker, RGBColor } from "./index.js";
+import { RGBColor, TweenableColorTicker } from "./index.js";
 
 export class TweenableColor extends EventEmitter<
   "onUpdate" | "onComplete",
@@ -18,7 +18,7 @@ export class TweenableColor extends EventEmitter<
     r: number = 0,
     g: number = 0,
     b: number = 0,
-    alpha: number = 1.0
+    alpha: number = 1.0,
   ) {
     super();
     this.color = new RGBColor(r, g, b, alpha);
@@ -30,10 +30,10 @@ export class TweenableColor extends EventEmitter<
     toB: number,
     toAlpha: number,
     duration: number,
-    option?: ChangeOption
+    option?: ChangeOption,
   ): void {
     const changeOption = TweenableColor.initOption(
-      option
+      option,
     ) as Required<ChangeOption>;
 
     if (this.color.equalRGBA(toR, toG, toB, toAlpha)) return;
@@ -52,7 +52,7 @@ export class TweenableColor extends EventEmitter<
     toR: number,
     toG: number,
     toB: number,
-    toAlpha: number
+    toAlpha: number,
   ): void {
     this.to.setRGBA(toR, toG, toB, toAlpha);
     this.from.set(this.color);
@@ -97,13 +97,13 @@ export class TweenableColor extends EventEmitter<
 
   getCSSStyle(): string {
     return `rgba(${Math.round(this.color.r)},${Math.round(
-      this.color.g
+      this.color.g,
     )},${Math.round(this.color.b)},${this.color.alpha})`;
   }
 
   getCSSColor(): string {
     return `rgb(${Math.round(this.color.r)},${Math.round(
-      this.color.g
+      this.color.g,
     )},${Math.round(this.color.b)})`;
   }
   getAlpha(): string {
@@ -115,7 +115,7 @@ export class TweenableColor extends EventEmitter<
       this.color.r,
       this.color.g,
       this.color.b,
-      this.color.alpha
+      this.color.alpha,
     );
   }
 }

@@ -1,4 +1,4 @@
-import Color, { ColorInstance } from "color";
+import Color, { type ColorInstance } from "color";
 import { RGBColor } from "./index.js";
 
 export class HSLColor {
