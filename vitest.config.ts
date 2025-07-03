@@ -2,11 +2,12 @@ import { defineConfig } from "vitest/config";
 
 export default defineConfig({
   test: {
-    browser: {
-      enabled: true,
-      provider: "webdriverio",
-      name: "chrome",
-      headless: true,
+    name: "jsdomTest",
+    environment: "jsdom",
+    environmentOptions: {
+      jsdom: {
+        resources: "usable",
+      },
     },
     coverage: {
       provider: "istanbul",
