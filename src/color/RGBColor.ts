@@ -1,4 +1,4 @@
-import { ColorInstance } from "color";
+import type { ColorInstance } from "color";
 import { HSLColor } from "./index.js";
 
 export class RGBColor {
@@ -32,7 +32,7 @@ export class RGBColor {
     this.alpha = alpha;
   }
   equalRGBA(r: number, g: number, b: number, alpha: number): boolean {
-    return this.r == r && this.g == g && this.b == b && this.alpha == alpha;
+    return this.r === r && this.g === g && this.b === b && this.alpha === alpha;
   }
   mix(from: RGBColor, to: RGBColor, t: number): void {
     const rt = 1 - t;

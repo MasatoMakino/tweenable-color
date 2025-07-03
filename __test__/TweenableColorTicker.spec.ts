@@ -1,7 +1,7 @@
-import { describe, afterEach, test, expect } from "vitest";
+import { afterEach, describe, expect, test } from "vitest";
 import { TweenableColorTicker } from "../src/index.js";
 
-describe("TweenableColor", () => {
+describe("TweenableColorTicker", () => {
   afterEach(() => {
     TweenableColorTicker.stop();
     TweenableColorTicker.ticker.removeAllListeners("raf");

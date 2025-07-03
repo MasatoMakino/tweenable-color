@@ -1,9 +1,9 @@
+import { Easing } from "@tweenjs/tween.js";
 import {
   TweenableColor,
-  TweenableHSL,
   TweenableColorTicker,
+  TweenableHSL,
 } from "../esm/index.js";
-import { Easing } from "@tweenjs/tween.js";
 export class Demo {
   constructor() {
     TweenableColorTicker.start();
@@ -23,8 +23,8 @@ export class Demo {
     const rect = document.createElement("div");
     rect.style.width = "100px";
     rect.style.height = "100px";
-    rect.style.top = x + "px";
-    rect.style.left = y + "px";
+    rect.style.top = `${x}px`;
+    rect.style.left = `${y}px`;
     rect.style.position = "absolute";
     rect.style.backgroundColor = color.getCSSColor();
     rect.style.opacity = color.getAlpha();
