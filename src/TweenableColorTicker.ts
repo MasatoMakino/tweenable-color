@@ -1,31 +1,41 @@
 import EventEmitter from "eventemitter3";
 
-export class TweenableColorTicker {
-  static readonly ticker: EventEmitter<"raf", number> = new EventEmitter();
+const ticker: EventEmitter<"raf", number> = new EventEmitter();
+let _rafID: number | undefined;
 
-  static get rafID() {
-    return TweenableColorTicker._rafID;
-  }
-  static _rafID?: number;
-  static start(now?: number): void {
-    if (!TweenableColorTicker._rafID) {
-      TweenableColorTicker.rafCallback(now ?? performance.now());
-    }
-  }
-
-  static stop(): void {
-    if (TweenableColorTicker._rafID) {
-      cancelAnimationFrame(TweenableColorTicker._rafID);
-      TweenableColorTicker._rafID = undefined;
-    }
-  }
-
-  static update(ms: number): void {
-    TweenableColorTicker.ticker.emit("raf", ms);
-  }
-
-  static rafCallback = (ms: number) => {
-    this.update(ms);
-    this._rafID = requestAnimationFrame(this.rafCallback);
-  };
+function getRafID(): number | undefined {
+  return _rafID;
 }
+
+function start(now?: number): void {
+  if (!_rafID) {
+    rafCallback(now ?? performance.now());
+  }
+}
+
+function stop(): void {
+  if (_rafID) {
+    cancelAnimationFrame(_rafID);
+    _rafID = undefined;
+  }
+}
+
+function update(ms: number): void {
+  ticker.emit("raf", ms);
+}
+
+function rafCallback(ms: number): void {
+  update(ms);
+  _rafID = requestAnimationFrame(rafCallback);
+}
+
+export const TweenableColorTicker = {
+  ticker,
+  get rafID() {
+    return getRafID();
+  },
+  start,
+  stop,
+  update,
+  rafCallback,
+};
