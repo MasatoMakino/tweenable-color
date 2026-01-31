@@ -16,11 +16,10 @@
     "esm"
   ],
   "scripts": {
+    "pre-commit": "biome format --write --no-errors-on-unmatched --files-ignore-unknown=true",
+    "pre-push": "biome ci . && vitest --run",
     "test": "vitest --run",
     "coverage": "npm run test -- --coverage",
-    "prepare": "husky",
-    "preversion": "npx @masatomakino/release-helper preversion",
-    "postversion": "npx @masatomakino/release-helper postversion",
     "start:dev": "npm run server & npm run watch:tsc & npm run watch:demo",
     "buildTS": "tsc",
     "watch:tsc": "tsc -W --incremental",
@@ -28,8 +27,7 @@
     "demo": "npx @masatomakino/gulptask-demo-page --copyTargets 'png','jpg','jpeg','obj'",
     "watch:demo": "npm run demo -- -W",
     "build": "npm run buildTS && npm run demo && npm run typedocs",
-    "server": "npx browser-sync ./docs/demo -w",
-    "release": "npx @masatomakino/release-helper release"
+    "server": "npx browser-sync ./docs/demo -w"
   },
   "repository": {
     "type": "git",
@@ -51,15 +49,10 @@
   "devDependencies": {
     "@biomejs/biome": "2.1.4",
     "@masatomakino/gulptask-demo-page": "^0.10.0",
-    "@masatomakino/release-helper": "^0.2.0",
     "@tweenjs/tween.js": "^25.0.0",
     "@vitest/coverage-istanbul": "^3.0.5",
-    "husky": "^9.1.3",
-    "lint-staged": "^16.1.0",
+    "jsdom": "^27.4.0",
     "typedoc": "^0.28.0",
     "typescript": "^5.5.4"
-  },
-  "lint-staged": {
-    "*.{js,ts,css,md}": "biome format --write --no-errors-on-unmatched"
   }
 }
