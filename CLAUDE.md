@@ -50,7 +50,7 @@ npx biome lint             # Run linter
 - **Biome**: Recently migrated from Prettier for formatting/linting (configured in `biome.json`)
 - **Vitest**: Testing framework with jsdom environment for browser APIs
 - **TypeScript**: ES2021 target with ES2022 modules
-- **Husky**: Git hooks for pre-commit code quality checks
+- **DevContainer Git Hooks**: Pre-commit and pre-push checks managed via DevContainer (`.devcontainer/git-hooks/`)
 
 ## Testing Notes
 

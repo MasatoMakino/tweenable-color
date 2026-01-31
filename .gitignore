@@ -108,3 +108,4 @@ dist
 cjs
 esm
 docs
+.claude/settings.local.json

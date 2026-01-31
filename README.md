@@ -3,8 +3,8 @@
 A TypeScript library for smooth color animations using easing functions. Provides RGB and HSL interpolation modes for natural color transitions.
 
 [![MIT License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](LICENSE)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/8bc4b3842a3c36b7b15a/test_coverage)](https://codeclimate.com/github/MasatoMakino/tweenable-color/test_coverage)
-[![Maintainability](https://api.codeclimate.com/v1/badges/8bc4b3842a3c36b7b15a/maintainability)](https://codeclimate.com/github/MasatoMakino/tweenable-color/maintainability)
+[![NPM Version](https://img.shields.io/npm/v/@masatomakino/tweenable-color.svg?style=flat)](https://www.npmjs.com/package/@masatomakino/tweenable-color)
+[![GitHub Repository](https://img.shields.io/badge/GitHub-Repository-blue?logo=github&style=flat)](https://github.com/MasatoMakino/tweenable-color)
 
 ## Features
 
