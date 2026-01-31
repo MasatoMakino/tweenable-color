@@ -27,7 +27,7 @@
     "demo": "npx @masatomakino/gulptask-demo-page --copyTargets 'png','jpg','jpeg','obj'",
     "watch:demo": "npm run demo -- -W",
     "build": "npm run buildTS && npm run demo && npm run typedocs",
-    "server": "npx browser-sync ./docs/demo -w"
+    "server": "npx browser-sync ./docs/demo -w --port 3000 --no-open"
   },
   "repository": {
     "type": "git",
@@ -48,7 +48,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "2.3.12",
-    "@masatomakino/gulptask-demo-page": "^0.10.0",
+    "@masatomakino/gulptask-demo-page": "^0.10.5",
     "@tweenjs/tween.js": "^25.0.0",
     "@vitest/coverage-istanbul": "^4.0.16",
     "jsdom": "^27.4.0",
